@@ -9,7 +9,7 @@ A Tkinter-based typing speed test desktop application.
 ## Demo
 Screenshot showing program in action.
 Initial launch screen for the application.
-![Screenshot of typing_speed_test](src/starting_wimdow.png)
+![Screenshot of typing_speed_test](src/starting_window.png)
 
 Saved Typing speed test statistics window.
 ![Screenshot of select statistics dialog ](src/typing_speed_stats.png)
