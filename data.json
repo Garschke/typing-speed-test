@@ -1,0 +1,74 @@
+{
+    "1": {
+        "date_text": "Saturday, 22 March 2025",
+        "start_time": 1742655790.555239,
+        "start_time_string": "16:03:10",
+        "elapsed_time": 116.98997807502747,
+        "elapsed_string": "01:56",
+        "word_count": 27,
+        "characters_count": 160,
+        "unique_characters": 32,
+        "typing_errors": 27,
+        "test_file": "An Advanced English Grammar - Introduction - The Nature of Language.txt"
+    },
+    "2": {
+        "date_text": "Saturday, 22 March 2025",
+        "start_time": 1742655986.272165,
+        "start_time_string": "16:06:26",
+        "elapsed_time": 120.61820077896118,
+        "elapsed_string": "02:00",
+        "word_count": 39,
+        "characters_count": 201,
+        "unique_characters": 27,
+        "typing_errors": 5,
+        "test_file": "Arthur Conan Doyle - The Adventures of Sherlock Holmes.txt"
+    },
+    "3": {
+        "date_text": "Saturday, 22 March 2025",
+        "start_time": 1742656164.991935,
+        "start_time_string": "16:09:24",
+        "elapsed_time": 189.67349910736084,
+        "elapsed_string": "03:09",
+        "word_count": 58,
+        "characters_count": 318,
+        "unique_characters": 33,
+        "typing_errors": 10,
+        "test_file": "Charles Dickens - A Christmas Carol - Marley was dead.txt"
+    },
+    "4": {
+        "date_text": "Saturday, 22 March 2025",
+        "start_time": 1742656397.384844,
+        "start_time_string": "16:13:17",
+        "elapsed_time": 145.1320719718933,
+        "elapsed_string": "02:25",
+        "word_count": 41,
+        "characters_count": 205,
+        "unique_characters": 31,
+        "typing_errors": 52,
+        "test_file": "The King James Bible - The First Book of Moses- Called Genesis.txt"
+    },
+    "5": {
+        "date_text": "Saturday, 22 March 2025",
+        "start_time": 1742656578.914465,
+        "start_time_string": "16:16:18",
+        "elapsed_time": 31.65307116508484,
+        "elapsed_string": "00:31",
+        "word_count": 9,
+        "characters_count": 44,
+        "unique_characters": 33,
+        "typing_errors": 2,
+        "test_file": "The quick brown fox jumps over the lazy dog.txt"
+    },
+    "6": {
+        "date_text": "Saturday, 22 March 2025",
+        "start_time": 1742666293.557229,
+        "start_time_string": "18:58:13",
+        "elapsed_time": 44.98861289024353,
+        "elapsed_string": "00:44",
+        "word_count": 9,
+        "characters_count": 44,
+        "unique_characters": 33,
+        "typing_errors": 0,
+        "test_file": "The quick brown fox jumps over the lazy dog.txt"
+    }
+}

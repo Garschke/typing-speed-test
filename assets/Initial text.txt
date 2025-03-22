@@ -1,0 +1,4 @@
+Text display area (shows text for typing test)
+ 
+You can start typing when selected text is loaded.
+The timer will start when first key is pressed.
