@@ -15,8 +15,8 @@ Select the test text file from the assets/test_text folder.
 You can also save any test text files in the folder, for use with the app. 
 ![Screenshot of select a file dialog](src/select_test_text_file.png)
 
-Test files should be a single paragraph and no more than around 200 words 
-or 1200 charters, to ensure all text fits in the display window.
+Test text files should be a single paragraph and no more than around 200 words 
+or 1200 characters, to ensure all text fits in the Text Display area.
 ![Screenshot of select a file dialog](src/typing_speed_test.png)
 
 Saved Typing speed test statistics window.
