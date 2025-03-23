@@ -127,13 +127,14 @@ class TypingSpeedTest:
         self.times_data.grid(row=5, column=3, padx=5, pady=5, sticky="w")
 
         # Buttons to save and review statistics and to stop test
-        self.start_button = tk.Button(self.main_frame, text='Save Statistics',
-                                      command=self.save_statistics)
-        self.start_button.grid(row=7, column=0, padx=5, pady=5, sticky="w")
+        self.stats_button = tk.Button(self.main_frame, text='Save Statistics',
+                                      command=self.save_stats)
+        self.stats_button.grid(row=7, column=0, padx=5, pady=5, sticky="w")
 
-        self.stop_button = tk.Button(self.main_frame, text='Review Statistics',
-                                     command=self.review_statistics)
-        self.stop_button.grid(row=7, column=1, padx=5, pady=5, sticky="e")
+        self.review_button = tk.Button(self.main_frame,
+                                       text='Review Statistics',
+                                       command=self.review_statistics)
+        self.review_button.grid(row=7, column=1, padx=5, pady=5, sticky="e")
 
         self.stop_button = tk.Button(self.main_frame, text='Stop Test',
                                      command=self.stop)
@@ -249,7 +250,8 @@ class TypingSpeedTest:
             self.text_label.config(text=self.text)  # test text to be display
             self.entry.config(state='normal')
             self.entry.delete(0, 'end')
-            self.msg_text = ('Type the above text in box below, ' +
+            self.entry_text = ''
+            self.msg_text = ('Type below the above text, ' +
                              'timer will begin when you start typing.')
             self.msg_label.config(text=self.msg_text)
             self.set_default()
@@ -270,21 +272,43 @@ class TypingSpeedTest:
 
     def stop(self):
         """ Calculate elapse time update UI stats """
-        self.end_time = time.time()
-        self.elapsed_time = time.time() - self.start_time
-        self.end_time_string = time.strftime("%H:%M:%S",
-                                             time.localtime(self.end_time))
-        self.elapsed_string = time.strftime("%M:%S",
-                                            time.localtime(self.elapsed_time))
-        self.entry.config(state='disabled')
-        self.msg_text = ("Test complete - check details below - " +
-                         "you can also 'Save Statistics'")
-        self.msg_label.config(text=self.msg_text)
-        self.analyse_typing()
+        if self.start_time == 0.0:
+            if self.entry_text == '':
+                self.msg_text = ("Test not yet started, begin typing below " +
+                                 "the above text to start.")
+            else:
+                self.msg_text = ("Test not yet started, press 'Select Text'" +
+                                 " button to load text.")
+            self.msg_label.config(text=self.msg_text)
+        else:
+            self.end_time = time.time()
+            self.elapsed_time = time.time() - self.start_time
+            self.end_time_string = time.strftime("%H:%M:%S",
+                                                 time.localtime(self.end_time))
+            self.elapsed_string = time.strftime("%M:%S",
+                                                time.localtime(self.elapsed_time))
+            self.entry.config(state='disabled')
+            self.msg_text = ("Test complete - check stats below - " +
+                             "you can also 'Save Statistics'")
+            self.msg_label.config(text=self.msg_text)
+            self.analyse_typing()
+
+    def save_stats(self):
+        if ((self.statistics_saved is False) and
+            (self.msg_text == ("Test complete - check stats below - " +
+                               "you can also 'Save Statistics'")) and
+            (len(self.entry.get()) > 0) and
+            (self.entry.get() != 'Text input box (Type text in this area)') and
+            (self.elapsed_time > 0)):
+            self.save_statistics()
+            return True
+        else:
+            print('save stats - False')
+            return False
 
     def save_statistics(self):
         """ Save typing test Statistics to json file """
-        if self.statistics_saved is False:
+        if self.save_stats:
             self.test = self.test + 1
             test = self.test
             new_data = {
@@ -316,13 +340,13 @@ class TypingSpeedTest:
                     # Saving updated data
                     json.dump(data, data_file, indent=4)
 
-                self.msg_text = ("Statistics successfully saved, " +
-                                 "for next test press 'Select Text' button.")
+                self.msg_text = ("Statistics saved, for next test press " +
+                                 "'Select Text' button.")
                 self.msg_label.config(text=self.msg_text)
                 self.statistics_saved = True
         else:
             self.msg_text = ("<- press 'Select Text' button for next test, " +
-                             "Statistics have been saved.")
+                             "Statistics saved.")
             self.msg_label.config(text=self.msg_text)
 
     def load_statistics(self):
@@ -412,9 +436,10 @@ class TypingSpeedTest:
                     char_cnt = self.data[record]["characters_count"]
                 char_per_word = (int(self.data[record]["characters_count"]) /
                                  int(self.data[record]["word_count"]))
-                str_value = f'{((char_per_word *
-                                 (self.data[record]["unique_characters"]**2))
-                                / (3 * char_cnt)):.1f}'
+                level = ((char_per_word *
+                          (self.data[record]["unique_characters"]**2))
+                         / (3 * char_cnt))
+                str_value = f'{level:.1f}'
                 ttk.Label(statistics,
                           text=str_value).grid(row=record, column=3,
                                                padx=5, pady=5, sticky="e")
@@ -444,14 +469,16 @@ class TypingSpeedTest:
                           text=str_value).grid(row=record, column=9,
                                                padx=5, pady=5, sticky="e")
                 # (wpm)
-                str_value = f'{(int(self.data[record]["word_count"]) /
-                                (self.data[record]["elapsed_time"] / 60)):.2f}'
+                wpm = (self.data[record]["word_count"] /
+                       (self.data[record]["elapsed_time"] / 60))
+                str_value = f'{wpm:.2f}'
                 ttk.Label(statistics,
                           text=str_value).grid(row=record, column=10,
                                                padx=5, pady=5, sticky="e")
                 # (cpm)
-                str_value = f'{(int(self.data[record]["characters_count"]) /
-                                (self.data[record]["elapsed_time"] / 60)):.2f}'
+                cpm = (self.data[record]["characters_count"] /
+                       (self.data[record]["elapsed_time"] / 60))
+                str_value = f'{cpm:.2f}'
                 ttk.Label(statistics,
                           text=str_value).grid(row=record, column=11,
                                                padx=5, pady=5, sticky="e")
@@ -460,9 +487,10 @@ class TypingSpeedTest:
                           text=str_value).grid(row=record, column=12,
                                                padx=5, pady=5, sticky="e")
                 # Error %
-                str_value = f'{(self.data[record]["typing_errors"] /
-                                (self.data[record]["typing_errors"] +
-                                 self.data[record]["characters_count"])):.2%}'
+                error_percent = (self.data[record]["typing_errors"] /
+                                 (self.data[record]["typing_errors"] +
+                                  self.data[record]["characters_count"]))
+                str_value = f'{error_percent:.2%}'
                 ttk.Label(statistics,
                           text=str_value).grid(row=record, column=13,
                                                padx=5, pady=5, sticky="e")

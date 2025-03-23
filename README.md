@@ -1,8 +1,8 @@
 # typing-speed-test
-A Tkinter-based typing speed test desktop application.
+A Python Tkinter-based typing speed test desktop application.
 
 ## Features
-- Select speed typing test text file
+- Select speed typing test text files
 - Analysis of typing speed and Accuracy
 - Save Typing test Statistics
 
@@ -10,6 +10,14 @@ A Tkinter-based typing speed test desktop application.
 Screenshot showing program in action.
 Initial launch screen for the application.
 ![Screenshot of typing_speed_test](src/starting_window.png)
+
+Select the test text file from the assets/test_text folder. 
+You can also save any test text files in the folder, for use with the app. 
+![Screenshot of select a file dialog](src/select_test_text_file.png)
+
+Test files should be a single paragraph and no more than around 200 words 
+or 1200 charters, to ensure all text fits in the display window.
+![Screenshot of select a file dialog](src/typing_speed_test.png)
 
 Saved Typing speed test statistics window.
 ![Screenshot of select statistics dialog ](src/typing_speed_stats.png)
@@ -36,3 +44,18 @@ source .venv/bin/activate
 ```sh
 pip install -r requirements.txt
 ```
+
+## Contributing
+Feel free to fork the repo and submit pull requests!
+
+## Fork the repository.
+1. Create your feature branch: git checkout -b feature/NewFeature
+2. Commit your changes: git commit -m 'Add new feature'
+3. Push to the branch: git push origin feature/NewFeature
+4. Open a pull request.
+
+## Dependencies
+* Python 3
+
+## License
+This project is licensed under the GPL-3.0 License - see the LICENSE file for details.
